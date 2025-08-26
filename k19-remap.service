@@ -1,0 +1,13 @@
+[Unit]
+Description=K19 Remapper
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/K19-Remap/k19-remap.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+
