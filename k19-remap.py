@@ -1,9 +1,23 @@
 #!/usr/bin/env python3
 from evdev import InputDevice, ecodes, UInput
+import os, time
 
-# 修改這裡 → 對應你的 K19 裝置 event 編號
-DEVICE = "/dev/input/event6"
-DEVICE = "/dev/input/by-id/usb-3151_Keycool_Gaming-event-kbd"
+def find_k19_device():
+    base = "/dev/input/by-id"
+    for fname in os.listdir(base):
+        if "Keycool" in fname and "kbd" in fname:
+            return os.path.join(base, fname)
+    return None
+
+DEVICE = None
+while DEVICE is None:
+    DEVICE = find_k19_device()
+    if DEVICE is None:
+        print("Waiting for K19 keyboard...")
+        time.sleep(1)
+
+print("Using device:", DEVICE)
+dev = InputDevice(DEVICE)
 
 dev = InputDevice(DEVICE)
 ui = UInput()
