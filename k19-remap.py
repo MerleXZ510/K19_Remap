@@ -3,6 +3,7 @@ from evdev import InputDevice, ecodes, UInput
 
 # 修改這裡 → 對應你的 K19 裝置 event 編號
 DEVICE = "/dev/input/event6"
+DEVICE = "/dev/input/by-id/usb-3151_Keycool_Gaming-event-kbd"
 
 dev = InputDevice(DEVICE)
 ui = UInput()
